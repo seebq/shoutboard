@@ -1,0 +1,10 @@
+
+<div id="shouts">
+<%= render :partial => 'messages' %>
+</div>
+
+<%= periodically_call_remote(:url => {:action => 'update_wall'} ) %>
+
+<p class="history"><%= link_to 'View the History', :action => 'history' %></p>
+
+<%= render :partial => 'shout' %>

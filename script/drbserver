@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby -w
+# script/drbserver 
+# DRb server
+
+# load DRb
+require 'drb'
+#require 'rubygems'
+#require_gem 'activerecord'
+
+# require all models
+#Dir["app/models/**/*.rb"].each { |file| require file }
+
+class DistributedServer
+  def perform_calculation(num)
+    # Message.calculate_rankings
+    num * num
+  end
+end
+
+#abort "usage: #{__FILE__} environment" unless ARGV[0]
+#database_yaml = YAML.load_file("config/database.yml")
+#ActiveRecord::Base.establish_connection(database_yaml[ARGV[0]])
+
+DRb.start_service("druby://localhost:9000", DistributedServer.new)
+puts "Starting DRb server at: #{DRb.uri}"
+DRb.thread.join
