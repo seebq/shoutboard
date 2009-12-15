@@ -1,0 +1,6 @@
+log/*.log
+log/*.pid
+log/*.ppid
+doc/api
+doc/app
+tmp/**/*
