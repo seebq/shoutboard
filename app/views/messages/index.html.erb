@@ -1,10 +1,13 @@
-
 <div id="shouts">
-<%= render :partial => 'messages' %>
+	<table class="listing">
+		<tbody id="messages_list">
+			<%= render :partial => "messages/item", :collection => @messages, :as => :message %>
+		</tbody>
+	</table>
 </div>
 
-<%= periodically_call_remote(:url => {:action => 'update_wall'} ) %>
-
-<p class="history"><%= link_to 'View the History', :action => 'history' %></p>
+<p class="history"><%= link_to 'View the History', messages_path(:history => 'show') %></p>
 
 <%= render :partial => 'shout' %>
+
+<%= periodically_call_remote(:url => {:action => 'update_wall'} ) %>

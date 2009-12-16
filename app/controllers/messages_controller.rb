@@ -11,6 +11,9 @@ class MessagesController < ApplicationController
       @messages = Message.all(:limit => 12)
     end
     
+    # create empty message object
+    @message = Message.new
+    
     respond_to do |format| 
       format.html
       format.xml { render :xml => @messages }

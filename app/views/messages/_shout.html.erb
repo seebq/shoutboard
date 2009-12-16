@@ -1,7 +1,9 @@
 <p>Say Something:</p>
 
-<% form_tag :action => 'shout' do %>
-	<%= text_field_tag 'message[user_name]', session[:user_name], :size => '10' %> says: <%= text_field :message, :body, :size => 60 %> <%= submit_tag 'Say It' %>
-	<span class="red"><%= flash[:notice] %></span>
+<% form_for @message do |f| %>
+	<%= f.text_field :user_name, :value => session[:user_name], :size => '10' %> says: <%= f.text_field :body, :size => 60 %> 
+	<%= f.submit 'Say It' %>
 <% end %>
+	
+	<span class="red"><%= flash[:notice] %></span>
   <p class="example">You _can_ use *almost* any <a href="http://hobix.com/textile/">Textilize</a> markup, or post a link like: <a href="http://www.google.com/">http://www.google.com/</a></p>

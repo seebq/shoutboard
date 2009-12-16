@@ -1,0 +1,3 @@
+<tr>
+	<td><strong><%=h message.user_name.blank? ? "Anonymous" : message.user_name %></strong> said <%= "#{time_ago_in_words(message.updated_at)} ago" %>: <%= textilize_without_paragraph(auto_link(message.body)) %></td>
+</tr>
