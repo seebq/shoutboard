@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
   # caches_action :update_wall
   
   def index
-    if params[:history] || params[:page]
+    if params[:page]
       @messages = Message.paginate :limit => 25, :page => params[:page]
     else
       @messages = Message.all(:limit => 12)

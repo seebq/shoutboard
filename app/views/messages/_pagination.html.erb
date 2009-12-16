@@ -1,0 +1,7 @@
+<p class="history">
+<% if !params[:page] %>
+	<%= link_to 'View the History', messages_path(:page => '1') %>
+<% else %>
+ <%= will_paginate @messages %>
+<% end %>
+</p>

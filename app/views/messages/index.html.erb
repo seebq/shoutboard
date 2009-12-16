@@ -7,5 +7,6 @@
 	<%= render :partial => "messages/messages", :locals => {:messages => @messages} %>
 </div>
 
-<p class="history"><%= link_to 'View the History', messages_path(:history => 'show') %></p>
+<%= render :partial => "messages/pagination" %>
+
 <%= periodically_call_remote(:url => messages_path, :method => :get ) %>
