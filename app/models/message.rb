@@ -42,7 +42,7 @@ class Message < ActiveRecord::Base
   private
   
   def valid_message_type
-    errors.add_to_base("Invalid message type") unless Message::Extensions::TYPES.keys.include?(message_type) or message_type.blank?
+    errors.add_to_base("Invalid message type") unless Message.message_types.include?(message_type)
   end
   
   

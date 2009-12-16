@@ -11,5 +11,5 @@ anonymous_message:
   
 message_with_code:
   user_name: cjd
-  body: "<%= mannish.features %>"
+  body: " mannish.features "
   message_type: codes
