@@ -73,3 +73,23 @@ h3 {
 div.fieldWithErrors {
 	display: inline;
 }
+textarea {
+	margin:0;
+	font-size:0.76em;
+	font-family: 'Lucida Grande',sans-serif;
+	font-size-adjust: none;
+	font-stretch:none;
+	font-style:normal;
+	line-height:1.2em;
+	padding-top:4px;
+}
+textarea.says {
+	width: 45em;
+	height: 1.5em;
+}
+
+textarea.codes {
+	width:45em;
+	height:15em;
+	margin:0;
+}

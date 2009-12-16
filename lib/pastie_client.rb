@@ -14,7 +14,7 @@ class PastieClient
   end
   
   def connect
-    @connection = Net::HTTP.new("pastie.caboo.se", 80)
+    @connection = Net::HTTP.new("pastie.org", 80)
   end
   
   def request(path, parameters = {})
@@ -33,7 +33,7 @@ class PastieClient
   alias :r :request
 
   # returns the id if the paste was saved successfully
-  def paste(body, syntax="ruby")
+  def paste(body, syntax="ruby_on_rails")
     request("/pastes/create", { :paste => { :body => body, :parser => syntax }})
   end
   alias :p :paste

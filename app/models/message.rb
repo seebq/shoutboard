@@ -1,6 +1,5 @@
 require 'pastie_client'
 class Message < ActiveRecord::Base
-  attr_accessor :message_type
   
   # Validations #
   validates_presence_of :body
@@ -21,18 +20,18 @@ class Message < ActiveRecord::Base
     end
     
     def message_types
-      Message::Extensions::TYPES
+      Message::Constants::TYPES
+    end
+    
+    def default_message_type
+      self.message_types.first
     end
     
   end
   
   # Modules #
-  module Extensions
-    TYPES = { 0 => 'says', 1 => 'codes'}.freeze
-  end
-
-  def message_type=(msg_typ)
-    @message_type = msg_typ.to_i
+  module Constants
+    TYPES = %w(says codes).freeze
   end
   
   def send_code_to_pastie

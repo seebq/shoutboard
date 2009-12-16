@@ -2,7 +2,14 @@
 message_with_user_name:
   user_name: cjd
   body: boo java
+  message_type: says
   
 anonymous_message:
   user_name: nil
   body: rabble rabble rabble
+  message_type: says
+  
+message_with_code:
+  user_name: cjd
+  body: "<%= mannish.features %>"
+  message_type: codes
