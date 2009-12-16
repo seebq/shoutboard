@@ -101,6 +101,9 @@ textarea.codes {
 	margin-top:0.25em;
 }
 
+#shout_body_input {
+	display:inline;
+}
 
 td {
 	padding:0.25em 0;

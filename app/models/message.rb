@@ -43,7 +43,7 @@ class Message < ActiveRecord::Base
   private
   
   def valid_message_type
-    errors.add_to_base("Invalid message type") unless Message.message_types.include?(message_type)
+    errors.add(:quantity,"Invalid message type") unless Message.message_types.include?(message_type)
   end
   
   

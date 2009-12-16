@@ -32,7 +32,7 @@ class MessagesController < ApplicationController
         format.xml  { render :xml => @message, :status => :created, :location => @message }
         format.js   { @new_message = Message.new }
       else
-        format.html { render :action => "index" }
+        format.html { @new_message = @message; render :action => "index" }
         format.xml  { render :xml => @message.errors, :status => :unprocessable_entity }
         format.js   { @new_message = @message }
       end

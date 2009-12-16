@@ -3,8 +3,14 @@
 <% remote_form_for @new_message do |f| %>
 
 	<%= f.text_field :user_name, :value => session[:user_name], :size => '10' %> 
-	<%= f.select :message_type, Message.message_types %>
-	<%= f.text_area :body, :class => Message.default_message_type %>
+	<%= f.select :message_type, Message.message_types, {}, :onchange => "toggle_textarea_and_input_field();" %>
+	<div id="shout_body_input">
+	<% if @new_message.is_code? || (!@new_message.new_record? && params[:message] && params[:message][:message_type] == 'codes') %>
+		<%= f.text_area :body, :class => Message.default_message_type, :class => "codes" %>
+	<% else %>
+		<%= f.text_field :body, :class => Message.default_message_type, :size => "60", :class => "says" %>
+	<% end %>
+	</div>
 	<%= f.submit 'Say It' %>
 <% end %>
 <p class="example">You _can_ use *almost* any <a href="http://hobix.com/textile/">Textilize</a> markup, or post a link like: <a href="http://www.google.com/">http://www.google.com/</a></p>
