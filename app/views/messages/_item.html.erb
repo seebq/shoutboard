@@ -1,5 +1,5 @@
-<tr>
-	<td><strong><%=h message.user_name.blank? ? "Anonymous" : message.user_name %></strong> <%= message.is_code? ? 'coded' : 'said' %> <%= "#{time_ago_in_words(message.updated_at)} ago" %>: 
+<tr valign="top">
+	<td><strong><%=h message.user_name.blank? ? "Anonymous" : message.user_name %></strong> <%= message.is_code? ? 'coded' : 'said' %> <%= "#{time_ago_in_words(message.updated_at)} ago" %>:
 	<% if message.is_code? %>
 		<%= render :partial => 'messages/codes_item', :locals => {:message => message} %>
 	<% else %>
