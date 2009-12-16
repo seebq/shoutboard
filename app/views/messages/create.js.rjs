@@ -1,6 +1,4 @@
 if @message.errors.empty?
   page.insert_html :top, 'messages_list', :partial => 'messages/item', :locals => {:message => @message}
-  page.replace_html 'shout_form', :partial => 'messages/shout'
-else
-  page.replace_html 'form_errors', :text => "error"
 end
+page.replace_html 'shout_form', :partial => 'messages/shout'
