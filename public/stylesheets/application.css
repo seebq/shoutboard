@@ -91,5 +91,11 @@ textarea.says {
 textarea.codes {
 	width:45em;
 	height:15em;
-	margin:0;
+	margin:1em 0;
+	display:block;
+}
+
+.CodeRay {
+	background:#111;
+	padding:0.5em 0;
 }

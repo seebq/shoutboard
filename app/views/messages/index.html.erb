@@ -8,5 +8,4 @@
 </div>
 
 <p class="history"><%= link_to 'View the History', messages_path(:history => 'show') %></p>
-
 <%= periodically_call_remote(:url => messages_path, :method => :get ) %>

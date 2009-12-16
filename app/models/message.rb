@@ -1,12 +1,10 @@
-require 'pastie_client'
+require 'rubygems'
+require 'coderay'
 class Message < ActiveRecord::Base
   
   # Validations #
   validates_presence_of :body
   validate :valid_message_type
-
-  # Callbacks #
-  after_validation :send_code_to_pastie
   
   # Scopes #
   default_scope :order => 'created_at DESC'
@@ -34,9 +32,12 @@ class Message < ActiveRecord::Base
     TYPES = %w(says codes).freeze
   end
   
-  def send_code_to_pastie
-    return true if message_type != 1
-    
+  def is_code?
+    'codes' == message_type
+  end
+  
+  def to_highlighted_code
+    CodeRay.scan(self.body, :ruby).div
   end
   
   private

@@ -1,3 +1,9 @@
 <tr>
-	<td><strong><%=h message.user_name.blank? ? "Anonymous" : message.user_name %></strong> said <%= "#{time_ago_in_words(message.updated_at)} ago" %>: <%= textilize_without_paragraph(auto_link(message.body)) %></td>
+	<td><strong><%=h message.user_name.blank? ? "Anonymous" : message.user_name %></strong> <%= message.is_code? ? 'coded' : 'said' %> <%= "#{time_ago_in_words(message.updated_at)} ago" %>: 
+	<% if message.is_code? %>
+		<%= render :partial => 'messages/codes_item', :locals => {:message => message} %>
+	<% else %>
+		<%= render :partial => 'messages/says_item', :locals => {:message => message} %>
+	<% end %>
+	</td>
 </tr>

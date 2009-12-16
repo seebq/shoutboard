@@ -4,10 +4,8 @@
 
 	<%= f.text_field :user_name, :value => session[:user_name], :size => '10' %> 
 	<%= f.select :message_type, Message.message_types %>
-	<%= f.text_area :body, :class => Message.default_message_type %> 
+	<%= f.text_area :body, :class => Message.default_message_type %>
 	<%= f.submit 'Say It' %>
 <% end %>
 <p class="example">You _can_ use *almost* any <a href="http://hobix.com/textile/">Textilize</a> markup, or post a link like: <a href="http://www.google.com/">http://www.google.com/</a></p>
 <div id="form_errors" class="red"><%= error_messages_for('new_message', :header_tag => 'p', :message => nil, :header_message => nil) %></div>
-
-<%= observe_field("message_message_type",  :function => "toggle_message_body_size") %>
