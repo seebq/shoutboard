@@ -1,41 +1,33 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'messages_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class MessagesController; def rescue_action(e) raise e end; end
+class MessagesControllerTest < ActionController::TestCase
 
-class MessagesControllerTest < Test::Unit::TestCase
-  def setup
-    @controller = MessagesController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-  end
-
-  def test_the_wall
-    get :wall
+  test "should load main index page" do
+    get :index
     assert_response :success
-    assert assigns(:messages)
+  end
+  
+  test "should create message shout without ajax" do
+    assert_difference('Message.count') do
+      post :create, :message => {:user_name => 'casey', :body => 'that that is is that that is not is not is that that is' }
+    end
+
+    assert_redirected_to messages_path
+  end
+  
+  test "should create message via ajax request" do
+    assert_difference('Message.count') do
+      xhr :post, :create, :message => {:user_name => 'casey', :body => 'that that is is that that is not is not is that that is' }
+    end
+    # make sure we set a new message object #
+    assert_not_nil assigns(:new_message) 
+    assert_response :success 
+  end
+  
+  test "should update dom after create message via ajax request" do
+    xhr :post, :create, :message => {:user_name => 'casey', :body => 'that that is is that that is not is not is that that is' }
+    assert_select_rjs :insert, :top, "messages_list"
   end
 
-  def test_the_history
-    get :history
-    assert_response :success
-    assert assigns(:messages)
-  end
-
-
-  def test_post_message
-    num_shouts = Message.count # 0
-    
-    # failure - no body
-    post :shout, :message => {:body => ""}
-    assert_equal num_shouts, Message.count
-    
-    # success
-    post :shout, :message => {:body => "Hey everybody, check this out!", :user_name => 'Bob'}
-
-    assert_equal num_shouts + 1, Message.count
-    assert_redirected_to '/messages/wall'
-  end
   
 end

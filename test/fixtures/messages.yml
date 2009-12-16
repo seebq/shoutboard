@@ -1,5 +1,8 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
-  id: 1
-two:
-  id: 2
+message_with_user_name:
+  user_name: cjd
+  body: boo java
+  
+anonymous_message:
+  user_name: nil
+  body: rabble rabble rabble
