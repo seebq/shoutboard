@@ -4,11 +4,20 @@ class MessagesController < ApplicationController
   # caches_page :wall
   # caches_action :update_wall
   
-  def wall
-    @messages = Message.find(:all, :limit => 12, :order => 'created_at DESC')
+  def index
+    if params[:history] || params[:page]
+      @messages = Message.paginate :limit => 25, :page => params[:page]
+    else
+      @messages = Message.all(:limit => 12)
+    end
+    
+    respond_to do |format| 
+      format.html
+      format.xml { render :xml => @messages }
+    end
   end
 
-  def shout
+  def create
     @message = Message.new(params[:message])
     if request.post? 
       if @message.save
@@ -20,10 +29,6 @@ class MessagesController < ApplicationController
       end
       redirect_to :action => 'wall'
     end
-  end
-  
-  def history
-    @messages = Message.find(:all, :order => 'created_at DESC')
   end
   
   def update_wall
