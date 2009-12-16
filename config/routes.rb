@@ -29,7 +29,7 @@ ActionController::Routing::Routes.draw do |map|
   #     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
   #     admin.resources :products
   #   end
-  map.root, :controller => 'messages', :action => 'wall'
+  map.root :controller => 'messages', :action => 'wall'
 
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'

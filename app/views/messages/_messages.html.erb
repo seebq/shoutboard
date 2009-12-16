@@ -1,0 +1,9 @@
+<table class="listing">
+	<tbody id="messages_list">
+  <% @messages.each do |message| -%>
+	  <tr>
+			<td><b><%=h message.user_name.blank? ? "Anonymous" : message.user_name %></b> said <%= "#{time_ago_in_words(message.updated_at)} ago" %>: <%= textilize_without_paragraph(auto_link(message.body)) %></td>
+		</tr>
+	<% end -%>
+	</tbody>
+</table>
