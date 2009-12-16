@@ -1,13 +1,12 @@
+<% @page_title = 'History' if params[:history] || params[:page] %>
+<div id="shout_form">
+	<%= render :partial => 'shout' %>
+</div>
+
 <div id="shouts">
-	<table class="listing">
-		<tbody id="messages_list">
-			<%= render :partial => "messages/item", :collection => @messages, :as => :message %>
-		</tbody>
-	</table>
+	<%= render :partial => "messages/messages", :locals => {:messages => @messages} %>
 </div>
 
 <p class="history"><%= link_to 'View the History', messages_path(:history => 'show') %></p>
 
-<%= render :partial => 'shout' %>
-
-<%= periodically_call_remote(:url => {:action => 'update_wall'} ) %>
+<%= periodically_call_remote(:url => messages_path, :method => :get ) %>

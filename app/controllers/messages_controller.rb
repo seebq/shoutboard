@@ -12,32 +12,30 @@ class MessagesController < ApplicationController
     end
     
     # create empty message object
-    @message = Message.new
+    @new_message = Message.new
     
     respond_to do |format| 
       format.html
+      format.js
       format.xml { render :xml => @messages }
     end
   end
 
   def create
     @message = Message.new(params[:message])
-    if request.post? 
+    respond_to do |format|
       if @message.save
+        # Save the submitted user name in the session for user's convenience #
         session[:user_name] = @message.user_name
-        expire_page :action => 'update_wall'
-        expire_page :action => 'wall'
+        
+        format.html { redirect_to messages_path }
+        format.xml  { render :xml => @message, :status => :created, :location => @message }
+        format.js   { @new_message = Message.new }
       else
-        flash[:notice] = "can't be empty!"
+        format.html { render :action => "index" }
+        format.xml  { render :xml => @message.errors, :status => :unprocessable_entity }
+        format.js   { @new_message = @message }
       end
-      redirect_to :action => 'wall'
-    end
-  end
-  
-  def update_wall
-    wall
-    render :update do |page|
-      page.replace_html 'shouts', :partial => 'messages'
     end
   end
   

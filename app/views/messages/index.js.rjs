@@ -1,0 +1,1 @@
+page.replace_html 'shouts', :partial => 'messages/messages', :locals => {:messages => @messages }
