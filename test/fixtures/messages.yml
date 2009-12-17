@@ -5,7 +5,6 @@ message_with_user_name:
   message_type: says
   
 anonymous_message:
-  user_name: nil
   body: rabble rabble rabble
   message_type: says
   
@@ -13,3 +12,25 @@ message_with_code:
   user_name: cjd
   body: " mannish.features "
   message_type: codes
+    
+message_with_children:
+  user_name: cjd
+  body: all my children
+  message_type: says
+
+message_without_children:
+  user_name: cjd
+  body: i have no children
+  message_type: says
+    
+child_message:
+  user_name: anonymous
+  body: you sux
+  message_type: says
+  parent: message_with_children
+  
+another_child_message:
+  user_name: cjd
+  body: no you sux
+  message_type: says
+  parent: message_with_children

@@ -2,9 +2,12 @@ require 'rubygems'
 require 'coderay'
 class Message < ActiveRecord::Base
   
+  has_many    :responses, :class_name => "Message", :foreign_key => :parent_id
+  belongs_to  :parent,    :class_name => "Message"
+  
   # Validations #
   validates_presence_of :body
-  validate :valid_message_type
+  validate :valid_message_type, :first_level_child
   
   # Scopes #
   default_scope :order => 'created_at DESC'
@@ -44,6 +47,10 @@ class Message < ActiveRecord::Base
   
   def valid_message_type
     errors.add(:quantity,"Invalid message type") unless Message.message_types.include?(message_type)
+  end
+  
+  def first_level_child
+    errors.add(:parent_id, "You cannot respond to another shout response.") if (!self.parent_id.blank? && !parent.parent_id.blank?)
   end
   
   

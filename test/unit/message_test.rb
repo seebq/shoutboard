@@ -11,6 +11,18 @@ class MessageTest < ActiveSupport::TestCase
     assert good_message.valid?
   end
   
+  test "cannot save a message with a parent of a message that is already a child" do
+    response_message = messages(:child_message)
+    new_message = Message.new(:body => 'hey', :user_name => 'anonymous', :message_type => Message.default_message_type, :parent_id => response_message.id)
+    assert !new_message.valid?
+  end
+  
+  test "can save a message as a response to an existing message" do
+    parent_message = messages(:message_without_children)
+    new_message = Message.new(:body => 'hey', :user_name => 'anonymous', :message_type => Message.default_message_type, :parent_id => parent_message.id)
+    assert new_message.valid?
+  end
+  
   test "should respond to message types" do
     assert Message.respond_to?(:message_types)
   end
@@ -34,5 +46,6 @@ class MessageTest < ActiveSupport::TestCase
     message.message_type = 'says' #valid
     assert message.valid?
   end
+
   
 end

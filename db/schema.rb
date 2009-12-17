@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091216052838) do
+ActiveRecord::Schema.define(:version => 20091217221228) do
 
   create_table "messages", :force => true do |t|
     t.text     "body",         :limit => 255
@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20091216052838) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "message_type"
+    t.integer  "parent_id"
   end
 
 end
