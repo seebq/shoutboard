@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class ResponsesControllerTest < ActionController::TestCase
+  
   test "index returns xml only" do
     parent = messages(:message_with_children)
     get :index, :format => "xml", :message_id => parent.to_param
@@ -12,7 +13,7 @@ class ResponsesControllerTest < ActionController::TestCase
     assert_response :success
   end
   
-  test "submitting a new response saves correctly" do
+  test "submitting a new response via ajax saves correctly" do
     assert_difference "Message.count" do 
       xhr :post, :create, :message_id => messages(:anonymous_message).to_param, 
                     :message => {:body => 'responsified', 
@@ -23,6 +24,17 @@ class ResponsesControllerTest < ActionController::TestCase
     
     assert_not_nil assigns(:new_message) # it should create a new, empty object for the form
     assert_not_nil assigns(:message) # and obviously provide the newly-created object to render
+  end
+  
+  test "submitting a new response via normal post-method saves correctly" do
+    assert_difference "Message.count" do 
+      post :create, :message_id => messages(:anonymous_message).to_param, 
+                    :message => {:body => 'responsified', 
+                                 :message_type => Message.default_message_type,
+                                 :parent_id => messages(:anonymous_message).to_param
+                                 }
+    end
+    assert_redirected_to messages_path
   end
   
   test "submitting a new response updates the DOM with new message" do
