@@ -20,7 +20,7 @@ class MessageTest < ActiveSupport::TestCase
   test "can save a message as a response to an existing message" do
     parent_message = messages(:message_without_children)
     new_message = Message.new(:body => 'hey', :user_name => 'anonymous', :message_type => Message.default_message_type, :parent_id => parent_message.id)
-    assert new_message.valid?
+    assert new_message.save
   end
   
   test "should respond to message types" do
@@ -47,5 +47,9 @@ class MessageTest < ActiveSupport::TestCase
     assert message.valid?
   end
 
+  test "message user_name should return anonymous if nil" do
+    message = messages(:anonymous_message)
+    assert_equal "anonymous", message.user_name
+  end
   
 end

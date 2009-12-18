@@ -1,0 +1,1 @@
+page.replace_html 'shout_form', :partial => 'messages/shout'

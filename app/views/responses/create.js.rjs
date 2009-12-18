@@ -1,0 +1,4 @@
+if @message.errors.empty?
+  page.replace_html 'shouts', :partial => 'messages/messages', :locals => {:messages => @messages }
+end
+page.replace_html 'shout_form', :partial => 'messages/shout'

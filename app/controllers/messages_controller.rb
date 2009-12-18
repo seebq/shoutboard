@@ -6,9 +6,9 @@ class MessagesController < ApplicationController
   
   def index
     if params[:page]
-      @messages = Message.paginate :limit => 25, :page => params[:page]
+      @messages = Message.parents.paginate :limit => 25, :page => params[:page], :include => :responses
     else
-      @messages = Message.all(:limit => 12)
+      @messages = Message.parents.all(:limit => 12, :include => :responses)
     end
     
     # create empty message object
@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
       format.xml { render :xml => @messages }
     end
   end
-
+  
   def create
     @message = Message.new(params[:message])
     respond_to do |format|

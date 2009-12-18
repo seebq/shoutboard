@@ -108,3 +108,7 @@ textarea.codes {
 td {
 	padding:0.25em 0;
 }
+
+table.responses_listing {
+	margin-left:40px;
+}

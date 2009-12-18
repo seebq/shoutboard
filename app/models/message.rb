@@ -2,7 +2,7 @@ require 'rubygems'
 require 'coderay'
 class Message < ActiveRecord::Base
   
-  has_many    :responses, :class_name => "Message", :foreign_key => :parent_id
+  has_many    :responses, :class_name => "Message", :foreign_key => :parent_id, :order => "created_at ASC"
   belongs_to  :parent,    :class_name => "Message"
   
   # Validations #
@@ -11,6 +11,7 @@ class Message < ActiveRecord::Base
   
   # Scopes #
   default_scope :order => 'created_at DESC'
+  named_scope   :parents, :conditions => {:parent_id => nil}
   
   # Class methods #
   class << self
@@ -42,6 +43,12 @@ class Message < ActiveRecord::Base
   def to_highlighted_code
     CodeRay.scan(self.body, :ruby).div
   end
+  
+  # Override user_name getter to return "anonymous" if blank
+  def user_name
+    read_attribute('user_name') || "anonymous"
+  end
+
   
   private
   

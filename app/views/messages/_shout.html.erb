@@ -1,9 +1,12 @@
 <p>Say Something:</p>
-
-<% remote_form_for @new_message do |f| %>
-
+<%# TODO: Too much code in the view?  This is kinda uglee. %>
+<% remote_form_for @new_message, (@options || {}) do |f| %>
 	<%= f.text_field :user_name, :value => session[:user_name], :size => '10' %> 
 	<%= f.select :message_type, Message.message_types, {}, :onchange => "toggle_textarea_and_input_field();" %>
+	<%= f.hidden_field :parent_id %>
+	<% if @new_message.parent %>
+		to <%= @new_message.parent.user_name %>
+	<% end %>
 	<div id="shout_body_input">
 	<% if @new_message.is_code? || (!@new_message.new_record? && params[:message] && params[:message][:message_type] == 'codes') %>
 		<%= f.text_area :body, :class => Message.default_message_type, :class => "codes" %>
