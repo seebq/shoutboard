@@ -97,8 +97,9 @@ textarea.codes {
 
 .CodeRay {
 	background:#111;
-	padding:0.5em 0;
+	padding:0.5em;
 	margin-top:0.25em;
+	width:700px;
 }
 
 #shout_body_input {
@@ -107,6 +108,11 @@ textarea.codes {
 
 td {
 	padding:0.25em 0;
+}
+
+table td {
+	vertical-align: top;
+	text-align: left
 }
 
 table.responses_listing {
