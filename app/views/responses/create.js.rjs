@@ -1,4 +1,4 @@
 if @message.errors.empty?
-  page.replace_html 'shouts', :partial => 'messages/messages', :locals => {:messages => @messages }
+  page.insert_html :bottom, "response_messages_list_to_shout_#{@message.parent.to_param}", :partial => 'messages/item', :locals => {:message => @message}
 end
 page.replace_html 'shout_form', :partial => 'messages/shout'

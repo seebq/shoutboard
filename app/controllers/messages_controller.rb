@@ -1,9 +1,8 @@
-require 'drb'
 class MessagesController < ApplicationController
 
-  # caches_page :wall
-  # caches_action :update_wall
-  
+  # GET /messages/index
+  # GET /messages/index.js
+  # GET /messages/index.xml
   def index
     if params[:page]
       @messages = Message.parents.paginate :limit => 25, :page => params[:page], :include => :responses
@@ -20,7 +19,10 @@ class MessagesController < ApplicationController
       format.xml { render :xml => @messages }
     end
   end
-  
+ 
+  # POST /messages/index
+  # POST /messages/index.js
+  # POST /messages/index.xml 
   def create
     @message = Message.new(params[:message])
     respond_to do |format|

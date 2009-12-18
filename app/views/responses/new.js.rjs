@@ -1,1 +1,2 @@
 page.replace_html 'shout_form', :partial => 'messages/shout'
+page << "focus_on_shout();"

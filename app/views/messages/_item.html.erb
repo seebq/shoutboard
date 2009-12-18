@@ -1,4 +1,4 @@
-<tr valign="top">
+<tr class="shout_<%= message.to_param %>">
 	<td><strong><%=h message.user_name %></strong> <%= message.is_code? ? 'coded' : 'said' %> <%= "#{time_ago_in_words(message.updated_at)} ago" %>:
 	<% if message.is_code? %>
 		<%= render :partial => 'messages/codes_item', :locals => {:message => message} %>
@@ -7,7 +7,7 @@
 	<% end %>
 	<% unless message.responses.empty? %>
 		<table class="responses_listing">
-			<tbody id="response_messages_list">
+			<tbody id="response_messages_list_to_shout_<%= message.to_param %>">
 				<%= render :partial => "messages/item", :collection => message.responses, :as => :message %>
 			</tbody>
 		</table>

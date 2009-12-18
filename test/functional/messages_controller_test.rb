@@ -9,7 +9,10 @@ class MessagesControllerTest < ActionController::TestCase
   
   test "should create message shout without ajax" do
     assert_difference('Message.count') do
-      post :create, :message => {:user_name => 'casey', :body => 'that that is is that that is not is not is that that is',:message_type => "says" }
+      post :create, :message => { :user_name => 'casey', 
+                                  :body => 'that that is is that that is not is not is that that is',
+                                  :message_type => "says" 
+                                }
     end
 
     assert_redirected_to messages_path
@@ -17,7 +20,10 @@ class MessagesControllerTest < ActionController::TestCase
   
   test "should create message via ajax request" do
     assert_difference('Message.count') do
-      xhr :post, :create, :message => {:user_name => 'casey', :body => 'that that is is that that is not is not is that that is', :message_type => "says" }
+      xhr :post, :create, :message => {:user_name => 'casey', 
+                                       :body => 'that that is is that that is not is not is that that is', 
+                                       :message_type => "says" 
+                                       }
     end
     # make sure we set a new message object #
     assert_not_nil assigns(:new_message) 
@@ -25,8 +31,14 @@ class MessagesControllerTest < ActionController::TestCase
   end
   
   test "should update dom after create message via ajax request" do
-    xhr :post, :create, :message => {:user_name => 'casey', :body => 'that that is is that that is not is not is that that is', :message_type => "codes" }
+    xhr :post, :create, :message => {:user_name => 'casey', 
+                                     :body => 'that that is is that that is not is not is that that is', 
+                                     :message_type => "codes" 
+                                     }
+                                     
     assert_select_rjs :insert, :top, "messages_list"
+    assert_select_rjs :replace_html, 'shout_form'
+    
   end
 
   

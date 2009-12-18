@@ -4,10 +4,8 @@
 <head>
 <title>The ShoutBoard 2.0 <%= @page_title ||= ''%></title>
 <%= stylesheet_link_tag 'application' %>
-<%= javascript_include_tag :defaults %>
+<%= javascript_include_tag "prototype" %>
 <script type="text/javascript">
-// this is way too specific...
-// TODO: make this not blow
 function toggle_textarea_and_input_field(dom_id) {
 	current_text = $('message_body').getValue();
 	type = $('message_message_type').getValue();
@@ -19,6 +17,10 @@ function toggle_textarea_and_input_field(dom_id) {
 	$('message_body').setValue(current_text);
 }
 
+//sets cursor to the new message body input
+function focus_on_shout() {
+	$("message_body").focus();
+}
 </script>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 </head>
