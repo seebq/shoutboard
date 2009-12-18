@@ -100,6 +100,8 @@ textarea.codes {
 	padding:0.5em;
 	margin-top:0.25em;
 	width:700px;
+	overflow:hidden;
+	font-size:90%;
 }
 
 #shout_body_input {
