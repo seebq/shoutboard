@@ -28,7 +28,10 @@ class ResponsesController < ApplicationController
         
         format.html { redirect_to messages_path }
         format.xml  { render :xml => @message, :status => :created, :location => @message }
-        format.js   { @messages = Message.parents.all(:limit => 12, :include => :responses); @new_message = Message.new }
+        format.js   { #TODO: Take this out of the create method.  It shouldn't be here.
+                      @messages = Message.parents.all(:limit => 12, :include => :responses)
+                      @new_message = Message.new 
+                    }
       else
         format.html { @new_message = @message; render :action => "new" }
         format.xml  { render :xml => @message.errors, :status => :unprocessable_entity }
